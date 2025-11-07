@@ -1,0 +1,71 @@
+﻿@model Student
+@{
+    Layout = "~/Views/Shared/MyLayoutHelper.cshtml";
+    ViewData["Title"] = "Student List";
+}
+
+
+<form asp-controller="Student" asp-action="Create" method="post" class="mt-3">
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Name" class="form-control" placeholder="Họ tên" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control" placeholder="Email" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Password" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Password" class="form-control" type="password" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Branch" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="Branch" asp-items="Html.GetEnumSelectList<Branch>()" class="form-control"></select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Gender" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            @foreach (var gender in ViewBag.AllGenders)
+            {
+                <label class="radio-inline">
+                    <input type="radio" asp-for="Gender" value="@gender" /> @gender
+                </label>
+            }
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="IsRegular" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="IsRegular" type="checkbox" /> Chính quy
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="DateOfBorth" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="DateOfBorth" class="form-control" type="date" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Address" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <textarea asp-for="Address" class="form-control"></textarea>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

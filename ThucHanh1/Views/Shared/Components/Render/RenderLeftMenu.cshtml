@@ -1,0 +1,12 @@
+﻿@model IEnumerable<ThucHanh1.Models.MenuItem>
+<nav class="sb-sidenav accordion sb-sidenav-dark">
+    <div class="sb-sidenav-menu">
+        <div class="nav">
+            <div class="sb-sidenav-menu-heading"></div>
+            @foreach (var item in Model)
+            {
+                <a class="nav-link" href="@item.Link">@item.Name</a>
+            }
+        </div>
+    </div>
+</nav>
