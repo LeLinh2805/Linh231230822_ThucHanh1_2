@@ -1,35 +1,57 @@
 ﻿@model IEnumerable<ThucHanh1.Models.Learner>
+@await Component.InvokeAsync("Major")
+
 
 <h1>Learner List</h1>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Mã</th>
-            <th>Tên</th>
-            <th>Họ</th>
-            <th>Ngành</th>
-            <th>Ngày nhập học</th>
-            <th>Chức năng</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var s in Model)
-        {
+<div id="content">
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@s.LearnerID</td>
-                <td>@s.FirstMidName</td>
-                <td>@s.LastName</td>
-                <td>@s.Major.MajorName</td>
-                <td>@s.EnrollmentDate.ToShortDateString()</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@s.LearnerID">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@s.LearnerID">Delete</a>
-                </td>
+                <th>Mã</th>
+                <th>Tên</th>
+                <th>Họ</th>
+                <th>Ngành</th>
+                <th>Ngày nhập học</th>
+                <th>Chức năng</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+
+        <tbody>
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.LearnerID</td>
+                    <td>@s.FirstMidName</td>
+                    <td>@s.LastName</td>
+                    <td>@s.Major.MajorName</td>
+                    <td>@s.EnrollmentDate.ToShortDateString()</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@s.LearnerID">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@s.LearnerID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div
+@section Scripts{
+<script>
+    $("li").click(function () {
+        var id = $(this).attr("id");
+
+        $.ajax({
+            url: "LearnerByMajorID",
+            data: { mid: id },
+            success: function (response) {
+                $("div#content").html(response);
+            }
+        });
+    });
+</script>
+}
+
+
+
+
 
 <a asp-action="Create" class="btn btn-primary">Create New Student</a>

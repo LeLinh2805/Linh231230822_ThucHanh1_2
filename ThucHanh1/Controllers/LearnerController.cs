@@ -14,6 +14,7 @@ namespace ThucHanh1.Controllers
         public LearnerController(SchoolContext context)
         {
             _context = context;
+            
         }
 
         public IActionResult Index()
@@ -100,6 +101,31 @@ namespace ThucHanh1.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+        public IActionResult LearnerByMajorID(int mid)
+        {
+            var learners = _context.Learners
+                .Where(l => l.MajorID == mid)
+                .Include(m => m.Major)
+                .ToList();
+
+            return PartialView("LearnerTable", learners);
+        }
+
+        public IActionResult Index(int? mid)
+        {
+            if (mid == null)
+            {
+                var learners = _context.Learners.Include(m => m.Major).ToList();
+                return View(learners);
+            }
+            else
+            {
+                var learners = _context.Learners
+                    .Where(l => l.MajorID == mid)
+                    .Include(m => m.Major).ToList();
+                return View(learners);
+            }
         }
 
 
