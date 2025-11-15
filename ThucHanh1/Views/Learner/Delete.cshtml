@@ -1,0 +1,25 @@
+﻿@model Learner
+
+<h1>Delete Learner</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<dl class="row">
+    <dt class="col-sm-4">Tên</dt>
+    <dd class="col-sm-8">@Model.FirstMidName</dd>
+
+    <dt class="col-sm-4">Họ</dt>
+    <dd class="col-sm-8">@Model.LastName</dd>
+
+    <dt class="col-sm-4">Ngành</dt>
+    <dd class="col-sm-8">@Model.Major.MajorName</dd>
+
+    <dt class="col-sm-4">Ngày nhập học</dt>
+    <dd class="col-sm-8">@Model.EnrollmentDate.ToShortDateString()</dd>
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="LearnerID" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>

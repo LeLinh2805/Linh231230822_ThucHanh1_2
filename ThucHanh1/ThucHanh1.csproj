@@ -6,4 +6,72 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\net8.0\ThucHanh1.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net8.0\ThucHanh1.GlobalUsings.g.cs" />
+    <Compile Include="obj\Debug\net8.0\ThucHanh1.RazorAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net8.0\appsettings.Development.json" />
+    <Content Include="bin\Debug\net8.0\appsettings.json" />
+    <Content Include="bin\Debug\net8.0\ThucHanh1.deps.json" />
+    <Content Include="bin\Debug\net8.0\ThucHanh1.runtimeconfig.json" />
+    <Content Include="bin\Debug\net8.0\ThucHanh1.staticwebassets.endpoints.json" />
+    <Content Include="bin\Debug\net8.0\ThucHanh1.staticwebassets.runtime.json" />
+    <Content Include="obj\Debug\net8.0\ApiEndpoints.json" />
+    <Content Include="obj\Debug\net8.0\rjimswa.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\rjsmcshtml.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\rjsmrazor.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\rpswa.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\scopedcss\bundle\ThucHanh1.styles.css" />
+    <Content Include="obj\Debug\net8.0\scopedcss\projectbundle\ThucHanh1.bundle.scp.css" />
+    <Content Include="obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.build.endpoints.json" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.build.json" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.development.json" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.references.upToDateCheck.txt" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.removed.txt" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.upToDateCheck.txt" />
+    <Content Include="obj\Debug\net8.0\ThucHanh1.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\net8.0\ThucHanh1.sourcelink.json" />
+    <Content Include="obj\project.assets.json" />
+    <Content Include="obj\ThucHanh1.csproj.nuget.dgspec.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net8.0\ThucHanh1.dll" />
+    <None Include="bin\Debug\net8.0\ThucHanh1.exe" />
+    <None Include="bin\Debug\net8.0\ThucHanh1.pdb" />
+    <None Include="obj\Debug\net8.0\apphost.exe" />
+    <None Include="obj\Debug\net8.0\refint\ThucHanh1.dll" />
+    <None Include="obj\Debug\net8.0\ref\ThucHanh1.dll" />
+    <None Include="obj\Debug\net8.0\staticwebassets.build.json.cache" />
+    <None Include="obj\Debug\net8.0\swae.build.ex.cache" />
+    <None Include="obj\Debug\net8.0\ThucHanh1.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net8.0\ThucHanh1.assets.cache" />
+    <None Include="obj\Debug\net8.0\ThucHanh1.csproj.BuildWithSkipAnalyzers" />
+    <None Include="obj\Debug\net8.0\ThucHanh1.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\net8.0\ThucHanh1.dll" />
+    <None Include="obj\Debug\net8.0\ThucHanh1.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\net8.0\ThucHanh1.genruntimeconfig.cache" />
+    <None Include="obj\Debug\net8.0\ThucHanh1.MvcApplicationPartsAssemblyInfo.cache" />
+    <None Include="obj\Debug\net8.0\ThucHanh1.pdb" />
+    <None Include="obj\Debug\net8.0\ThucHanh1.RazorAssemblyInfo.cache" />
+    <None Include="obj\project.nuget.cache" />
+    <None Include="obj\ThucHanh1.csproj.nuget.g.props" />
+    <None Include="obj\ThucHanh1.csproj.nuget.g.targets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="obj\Debug\net8.0\staticwebassets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+  </ItemGroup>
+
 </Project>
