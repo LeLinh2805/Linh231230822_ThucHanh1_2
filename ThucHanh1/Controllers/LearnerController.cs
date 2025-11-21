@@ -16,15 +16,6 @@ namespace ThucHanh1.Controllers
             _context = context;
             
         }
-
-        public IActionResult Index()
-        {
-            var learners = _context.Learners
-                            .Include(m => m.Major)
-                            .ToList();
-
-            return View(learners);
-        }
         public IActionResult Create()
         {
             ViewBag.MajorID = new SelectList(_context.Majors, "MajorID", "MajorName");
@@ -83,8 +74,8 @@ namespace ThucHanh1.Controllers
             if (learner == null)
                 return NotFound();
 
-            if (learner.Enrollments.Count > 0)
-                return Content("This learner has enrollments and cannot be deleted.");
+            //if (learner.Enrollments.Count > 0)
+              //  return Content("This learner has enrollments and cannot be deleted.");
 
             return View(learner);
         }
@@ -92,16 +83,23 @@ namespace ThucHanh1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var learner = _context.Learners.Find(id);
+            var learner = _context.Learners
+                            .Include(l => l.Enrollments) // phải include để xóa enrollment
+                            .FirstOrDefault(l => l.LearnerID == id);
 
             if (learner != null)
             {
+                // Xóa tất cả enrollment trước
+                if (learner.Enrollments.Any())
+                    _context.Enrollments.RemoveRange(learner.Enrollments);
+
                 _context.Learners.Remove(learner);
                 _context.SaveChanges();
             }
 
             return RedirectToAction(nameof(Index));
         }
+
         public IActionResult LearnerByMajorID(int mid)
         {
             var learners = _context.Learners
@@ -111,22 +109,56 @@ namespace ThucHanh1.Controllers
 
             return PartialView("LearnerTable", learners);
         }
+        private int pageSize = 3;
 
         public IActionResult Index(int? mid)
         {
-            if (mid == null)
+            var learners = _context.Learners.Include(m => m.Major).AsQueryable();
+
+            if (mid != null)
             {
-                var learners = _context.Learners.Include(m => m.Major).ToList();
-                return View(learners);
+                learners = learners.Where(l => l.MajorID == mid)
+                                   .Include(m => m.Major);
             }
-            else
-            {
-                var learners = _context.Learners
-                    .Where(l => l.MajorID == mid)
-                    .Include(m => m.Major).ToList();
-                return View(learners);
-            }
+
+            int pageNum = (int)Math.Ceiling(learners.Count() / (float)pageSize);
+            ViewBag.pageNum = pageNum;
+
+            var result = learners.Take(pageSize).ToList();
+            return View(result);
         }
+        public IActionResult LearnerFilter(int? mid, string? keyword, int? pageIndex)
+        {
+            var learners = _context.Learners.AsQueryable();
+
+            int page = pageIndex == null || pageIndex <= 0 ? 1 : pageIndex.Value;
+
+            if (mid != null)
+            {
+                learners = learners.Where(l => l.MajorID == mid);
+            }
+            ViewBag.mid = mid;
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                learners = learners.Where(l => l.FirstMidName.ToLower()
+                .Contains(keyword.ToLower()));
+            }
+            ViewBag.keyword = keyword;
+
+            int pageNum = (int)Math.Ceiling(learners.Count() / (float)pageSize);
+            ViewBag.pageNum = pageNum;
+
+            var result = learners
+                .Skip(pageSize * (page - 1))
+                .Take(pageSize)
+                .Include(m => m.Major)
+                .ToList();
+
+            return PartialView("LearnerTable", result);
+        }
+
+
 
 
     }

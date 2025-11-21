@@ -2,6 +2,7 @@
 @await Component.InvokeAsync("Major")
 
 
+
 <h1>Learner List</h1>
 <div id="content">
     <table class="table table-striped">
@@ -33,6 +34,18 @@
             }
         </tbody>
     </table>
+    <input id="keyword" class="form-control" type="text" placeholder="Search learner" />
+    <button id="btnSearch" class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+
+    <ul class="pagination">
+        @for (int i = 1; i <= ViewBag.pageNum; i++)
+        {
+            <li class="page-item" page="@i">
+                <a class="page-link">@i</a>
+            </li>
+        }
+    </ul>
+
 </div
 @section Scripts{
 <script>
@@ -47,6 +60,32 @@
             }
         });
     });
+        $('body').on('click', 'li.page-item', function () {
+        var page = $(this).attr("page");
+        var mid = $(this).attr("mid");
+        var keyword = $(this).attr("keyword");
+
+        $.ajax({
+            url: "LearnerFilter",
+            data: { mid: mid, keyword: keyword, pageIndex: page },
+            success: function (response) {
+                $("div#content").html(response);
+            }
+        });
+    });
+
+    $("button#btnSearch").click(function () {
+        var keyword = $("#keyword").val();
+
+        $.ajax({
+            url: "LearnerFilter",
+            data: { keyword: keyword },
+            success: function (response) {
+                $("div#content").html(response);
+            }
+        });
+    });
+
 </script>
 }
 
